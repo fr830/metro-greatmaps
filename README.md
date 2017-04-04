@@ -6,8 +6,7 @@ The awesome [Metro WPF controls](http://mahapps.com/) are used.
 # A list of changes from the original:
 * Message pop-up for traffic simulation is redesigned.
 * All options are categorized to appropriate Flyouts.
-* GMap control now takes the whole screen, with search bar and zoom buttons hovering above,
-* providing a cleaner experience.
+* GMap control now takes the whole screen, with search bar and zoom buttons hovering above, providing a cleaner experience.
 *"Margin hell" is relatively solved, and minimal margin usage is applied.
 
 # Things I wish to do:
