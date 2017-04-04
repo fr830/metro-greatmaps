@@ -1,6 +1,6 @@
 # metro-greatmaps
 
-This is a redesign of a WPF which showcases the greatmaps control.
+This is a redesign of the [greatmaps WPF control demo](https://github.com/radioman/greatmaps).
 The awesome [Metro WPF controls](http://mahapps.com/) are used.
 
 # A list of changes from the original:
