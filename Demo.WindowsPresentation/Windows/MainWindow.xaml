@@ -1,0 +1,209 @@
+﻿<Controls:MetroWindow x:Class="Demo.WindowsPresentation.MainWindow"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="GMaps"
+                      Height="775" Width="888"
+                      BorderThickness="0" 
+                      GlowBrush="Black"
+                      ResizeMode="CanResizeWithGrip"
+                      WindowStartupLocation="CenterScreen"
+                      KeyboardNavigation.DirectionalNavigation="Once"
+                      xmlns:src="clr-namespace:Demo.WindowsPresentation"
+                      MinHeight="775" MinWidth="600" KeyUp="Window_KeyUp" PreviewKeyDown="Window_PreviewKeyDown">
+    <Controls:MetroWindow.WindowButtonCommands>
+        <Controls:WindowButtonCommands Style="{DynamicResource MahApps.Metro.Styles.WindowButtonCommands.Win10}" />
+    </Controls:MetroWindow.WindowButtonCommands>
+    <Grid Name="mapgroup">
+        <src:Map x:Name="MainMap" Zoom="13" MaxZoom="24" MinZoom="1" />
+        <StackPanel Margin="0,0,20,0" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical">
+            <Button Width="40" Height="40" Margin="2" Click="czuZoomUp_Click"   >
+                <iconPacks:PackIconMaterial Kind="MagnifyPlus"/>
+            </Button>
+            <Button Width="40" Height="40" Margin="2" Click="czuZoomDown_Click" >
+                <iconPacks:PackIconMaterial Kind="MagnifyMinus"/>
+            </Button>
+        </StackPanel>
+        <TextBox Margin="10,10,0,0" 
+                 HorizontalAlignment="Left" 
+                 VerticalAlignment="Top" 
+                 Width="250" 
+                 Height="20" 
+                 Name="textBoxGeo" 
+                 Controls:TextBoxHelper.Watermark="Search..." 
+                 KeyUp="textBoxGeo_KeyUp" >
+        </TextBox>
+    </Grid>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="SettingsFlyout" Header="Settings" Position="Right" Width="312" Theme="Accent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Header="gmap"  Name="groupBox2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="1" Name="label1">Type</Label>
+                            <ComboBox Grid.Row="0" Grid.Column="0" FontSize="12" Name="comboBoxMapType">
+                                <ComboBox.SelectedItem>
+                                    <Binding Path="MapProvider" ElementName="MainMap">
+                                        <Binding.ValidationRules>
+                                            <src:MapValidationRule x:Name="validator"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.SelectedItem>
+                            </ComboBox>
+
+                            <Label Grid.Row="1" Grid.Column="1" Name="label5" VerticalAlignment="Top" >Mode</Label>
+                            <ComboBox Grid.Row="1" Grid.Column="0" FontSize="12" Name="comboBoxMode" DropDownClosed="comboBoxMode_DropDownClosed" />
+
+                            <CheckBox Grid.Row="2" Grid.Column="0" Name="checkBoxDragMap" IsChecked="True" Checked="checkBoxDragMap_Checked" Unchecked="checkBoxDragMap_Unchecked">Drag Map</CheckBox>
+                            <CheckBox Grid.Row="3" Grid.Column="0" IsChecked="True" Name="checkBoxCurrentMarker" Checked="checkBoxCurrentMarker_Checked" Unchecked="checkBoxCurrentMarker_Unchecked">Current Marker</CheckBox>
+                            <CheckBox Grid.Row="4" Grid.Column="0" Name="checkBoxDebug" Checked="checkBox1_Checked" Unchecked="checkBox1_Unchecked">Grid</CheckBox>
+                            
+                            <Button Grid.Row="5" Grid.ColumnSpan="2" Width="50" Name="button7" Click="button7_Click">Save</Button>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Cache" Grid.Row="1" Name="groupBox4" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Row="0" Grid.Column="0" Name="button3" Click="button3_Click">Prefetch</Button>
+                            <Button Grid.Row="0" Grid.Column="1" Name="button4" Click="button4_Click">Clear All</Button>
+
+                            <Button Grid.Row="1" Grid.Column="0" Name="button5" Click="button5_Click" >Import</Button>
+                            <Button Grid.Row="1" Grid.Column="1" Name="button6" Click="button6_Click" >Export</Button>
+
+                            <CheckBox Grid.Row="2" Grid.Column="0" Name="checkBoxCacheRoute" Checked="checkBoxCacheRoute_Checked" Unchecked="checkBoxCacheRoute_Checked" >Routing</CheckBox>
+                            <CheckBox Grid.Row="2" Grid.Column="1" Name="checkBoxGeoCache" Checked="checkBoxGeoCache_Checked">Geocoding</CheckBox>
+                        </Grid>
+                    </GroupBox>
+                </Grid> 
+            </Controls:Flyout>
+            <Controls:Flyout x:Name="NavigationFlyout"  Header="Navigation" Position="Right" Width="312" Theme="Accent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox  Header="Markers" Grid.Row="0"  Name="markers">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="0" Grid.Column="0" Name="button8" Click="button8_Click">Add Marker</Button>
+                            <Button Grid.Row="0" Grid.Column="1" Name="button10" Click="button10_Click" >Clear All</Button>
+                            <CheckBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Name="checkBoxPlace" IsChecked="True">Place Info</CheckBox>
+                            <Button   Grid.Row="1" Grid.Column="0" Name="button13"  Click="button13_Click">Zoom Center</Button>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox  Header="Routes" Grid.Row="1"  Name="routes" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="0" Grid.Column="0" Name="button11"  Click="button11_Click">Set start</Button>
+                            <Button Grid.Row="0" Grid.Column="1" Name="button9"   Click="button9_Click">Set end</Button>
+                            <Button Grid.Row="1" Grid.ColumnSpan="2" Name="button12"  Click="button12_Click">Add route</Button>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Coordinates" Grid.Row="2"  Name="groupBox1" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label   Name="label2"     Grid.Row="0">Latitude: </Label>
+                            <TextBox Name="textBoxLat" Grid.Row="1" Grid.ColumnSpan="2" />
+                            <Label   Name="label3"     Grid.Row="2" >Longitude: </Label>
+                            <TextBox Name="textBoxLng" Grid.Row="3" Grid.ColumnSpan="2" />
+                            <Button  Name="button1"    Grid.Row="4" Grid.Column="1" Click="button1_Click" >Reload</Button>
+                            <Button  Name="button2"    Grid.Row="4"  Click="button2_Click">Go To!</Button>
+                        </Grid>
+                    </GroupBox>
+                </Grid> 
+            </Controls:Flyout>
+            <Controls:Flyout x:Name="MiscFlyout" Header="Misc" Position="Right" Width="312" Theme="Accent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Real Time" Grid.Row="0" Name="groupBox5" >
+                        <Grid Height="Auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Name="radioButtonTransport"   Checked="realTimeChanged" Grid.Row="0" >Transport demo</RadioButton>
+                            <RadioButton Name="radioButtonPerformance" Checked="realTimeChanged" Grid.Row="1"  >Performance</RadioButton>
+                            <RadioButton Name="radioButtonNone"        Checked="realTimeChanged" Grid.Row="2" IsChecked="True">None</RadioButton>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="1" Header="loading" Height="50" Name="groupBox3">
+                        <Grid>
+                            <ProgressBar Margin="2" Name="progressBar1" IsIndeterminate="True" />
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+   </Controls:MetroWindow.Flyouts>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <ToggleButton Content="Settings" 
+                          IsChecked="{Binding ElementName=SettingsFlyout, Path=IsOpen}" Cursor="Hand"/>
+            <ToggleButton Content="Navigation" 
+                          IsChecked="{Binding ElementName=NavigationFlyout, Path=IsOpen}" Cursor="Hand"/>
+            <ToggleButton Content="Misc" 
+                          IsChecked="{Binding ElementName=MiscFlyout, Path=IsOpen}" Cursor="Hand"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+</Controls:MetroWindow>

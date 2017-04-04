@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Demo.WindowsPresentation.Controls.TrolleyTooltip"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="Transparent" Height="186" Width="226" IsHitTestVisible="False">
+    <Grid Background="Beige">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Name="label1" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="14" Foreground="Navy" >Line:</Label>
+        <TextBlock Grid.Row="0" Grid.Column="1" Name="LineNum" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" FontSize="14" FontWeight="Bold" Text="4444"></TextBlock>
+
+        <Label Grid.Row="1" Grid.Column="0" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Navy" Name="label3" >Device:</Label>
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Foreground="MediumBlue" Name="Device" Text="44"></TextBlock>
+
+        
+
+        <Label Grid.Row="2" Grid.Column="0" FontSize="14" Foreground="Navy" Height="36" HorizontalAlignment="Center" VerticalAlignment="Center" Name="label5" >Street:</Label>
+        <TextBlock FontSize="14" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" FontWeight="Bold" Foreground="DarkBlue"  Name="Street" Text="Saulėtekio al."></TextBlock>
+
+
+        <Label FontSize="14" Foreground="Navy" Name="label2" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" >Area:</Label>
+        <TextBlock FontSize="14" FontWeight="Bold" Foreground="DarkBlue"  Name="Area" Text="Antakalnis" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+
+        <Label FontSize="14" Foreground="Navy" Grid.Row="4" Name="label4" VerticalAlignment="Center" HorizontalAlignment="Center" >Stop:</Label>
+        <TextBlock FontSize="14" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Maroon"  Name="StopName"  Text="Senoji plytinė"></TextBlock>
+
+        <TextBlock FontSize="8" Grid.Row="5" Grid.ColumnSpan="2" FontWeight="Normal" Foreground="CadetBlue" Name="TrackType" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Pašilaičiai—Konstitucijos pr.—Antakalnis—Saulėtekis" TextWrapping="Wrap"></TextBlock>
+        <TextBlock Grid.Row="6" Grid.ColumnSpan="2" FontSize="14" FontWeight="Normal" Foreground="CadetBlue"  Name="TimeGps" VerticalAlignment="Center" HorizontalAlignment="Right"  Text="15:55:55" TextAlignment="Left"></TextBlock>
+    </Grid>
+</UserControl>
